@@ -6,6 +6,8 @@ import "flatpickr/dist/flatpickr.min.css";
 const buttonStartRef = document.querySelector('button[data-start]');
 const inputRef = document.querySelector('input[type="text"]');
 
+
+
 // const timer = {
 //     start() {
 //         const startTime = Date.now();
@@ -36,6 +38,7 @@ const options = {
             const currentTime = Date.now();
             const deltaTime = selectedDates[0] - currentTime;
             const { days, hours, minutes, seconds } = convertMs(deltaTime);
+            updateClockFace();
             console.log(`${days}:${hours}:${minutes}:${seconds}`);
         }, 1000);
     }
@@ -74,4 +77,9 @@ function convertMs(ms) {
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
+}
+
+function updateClockFace({ days, hours, minutes, seconds }) {
+  inputRef.dataset.days. = `${days}`
+  // inputRef.clockFace.textContent = `${days} : ${hours} : ${minutes} : ${seconds}`;
 }
