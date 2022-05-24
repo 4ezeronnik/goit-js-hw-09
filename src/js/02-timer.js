@@ -6,21 +6,11 @@ import "flatpickr/dist/flatpickr.min.css";
 const buttonStartRef = document.querySelector('button[data-start]');
 const inputRef = document.querySelector('input[type="text"]');
 
+const dataSecondsTimer = document.querySelector('span[data-seconds]');
+const dataMinutesTimer = document.querySelector('span[data-minutes]');
+const dataHoursTimer = document.querySelector('span[data-hours]');
+const dataDaysTimer = document.querySelector('span[data-days]');
 
-
-// const timer = {
-//     start() {
-//         const startTime = Date.now();
-//         setInterval(() => {
-//             const currentTime = Date.now();
-//             const deltaTime = currentTime - startTime;
-//             const timeComponents = convertMs(deltaTime);
-//             console.log(timeComponents);
-//             // console.log(currentTime - startTime);
-//         }, 1000);
-//     }
-// }
-// timer.start();
 
 
 const options = {
@@ -39,7 +29,19 @@ const options = {
             const deltaTime = selectedDates[0] - currentTime;
             const { days, hours, minutes, seconds } = convertMs(deltaTime);
             updateClockFace();
-            console.log(`${days}:${hours}:${minutes}:${seconds}`);
+            console.log(`${days}:${hours}:${minutes}:${seconds}`)
+              ;
+            function updateClockFace() {
+              const { days, hours, minutes, seconds } = convertMs(deltaTime);
+              dataSecondsTimer.innerHTML = `${seconds}`;
+              dataMinutesTimer.innerHTML = `${minutes}`;
+              dataHoursTimer.innerHTML = `${hours}`;
+              dataDaysTimer.innerHTML = `${days}`;
+
+              
+  
+  
+}
         }, 1000);
     }
 }
@@ -49,12 +51,7 @@ timer.start();
 
  const fp = flatpickr(inputRef, options);
 
-buttonStartRef.addEventListener('click', onButtonClick);
 
-function onButtonClick() {
-  
-  
-}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -79,7 +76,4 @@ function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
-function updateClockFace({ days, hours, minutes, seconds }) {
-  inputRef.dataset.days. = `${days}`
-  // inputRef.clockFace.textContent = `${days} : ${hours} : ${minutes} : ${seconds}`;
-}
+
