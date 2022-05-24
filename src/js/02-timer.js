@@ -19,14 +19,26 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-      console.log(selectedDates[0]);
-      const timer = {
-        start() {
-    
+    console.log(selectedDates[0]);
+   
+    const timer = {
+      start() {
+      
           setInterval(() => {
        
             const currentTime = Date.now();
+            
             const deltaTime = selectedDates[0] - currentTime;
+
+            if (deltaTime < 0) {
+              window.alert("Please choose a date in the future");
+              return
+            }
+
+            if (deltaTime >= 0) {
+              buttonStartRef.disabled = false;
+            }
+
             const { days, hours, minutes, seconds } = convertMs(deltaTime);
             updateClockFace();
             console.log(`${days}:${hours}:${minutes}:${seconds}`)
@@ -37,21 +49,16 @@ const options = {
               dataMinutesTimer.innerHTML = `${minutes}`;
               dataHoursTimer.innerHTML = `${hours}`;
               dataDaysTimer.innerHTML = `${days}`;
-
-              
-  
-  
-}
+            }
         }, 1000);
     }
 }
-timer.start();
+    
+    buttonStartRef.addEventListener('click', timer.start)
   },
 };
 
  const fp = flatpickr(inputRef, options);
-
-
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
