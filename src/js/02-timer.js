@@ -12,37 +12,36 @@ const dataHoursTimer = document.querySelector('span[data-hours]');
 const dataDaysTimer = document.querySelector('span[data-days]');
 
 
-
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+  
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-   
-    const timer = {
-      start() {
-      
-          setInterval(() => {
-       
-            const currentTime = Date.now();
+    
+      let currentTime = Date.now();
             
-            const deltaTime = selectedDates[0] - currentTime;
+            let deltaTime = selectedDates[0] - currentTime;
 
             if (deltaTime < 0) {
               window.alert("Please choose a date in the future");
               return
             }
+    
+    const timer = {
+      start() {
+   
+          setInterval(() => {
+       
+             currentTime = Date.now();
+            
+             deltaTime = selectedDates[0] - currentTime;
 
-            if (deltaTime >= 0) {
-              buttonStartRef.disabled = false;
-            }
-
-            const { days, hours, minutes, seconds } = convertMs(deltaTime);
             updateClockFace();
-            console.log(`${days}:${hours}:${minutes}:${seconds}`)
-              ;
+          
+              
             function updateClockFace() {
               const { days, hours, minutes, seconds } = convertMs(deltaTime);
               dataSecondsTimer.innerHTML = `${seconds}`;
@@ -50,11 +49,10 @@ const options = {
               dataHoursTimer.innerHTML = `${hours}`;
               dataDaysTimer.innerHTML = `${days}`;
             }
-        }, 1000);
+          }, 1000);
+      }
     }
-}
-    
-    buttonStartRef.addEventListener('click', timer.start)
+      buttonStartRef.addEventListener('click', timer.start);
   },
 };
 
