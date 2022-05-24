@@ -24,6 +24,7 @@ const options = {
       let currentTime = Date.now();
             
     let deltaTime = selectedDates[0] - currentTime;
+    let intervalId = null;
     
             if (deltaTime < 0) {
               window.alert("Please choose a date in the future");
@@ -32,17 +33,22 @@ const options = {
               buttonStartRef.disabled = false;
             }
     
-  
     
     const timer = {
       start() {
-   
-          setInterval(() => {
-       
-             currentTime = Date.now();
-            
-             deltaTime = selectedDates[0] - currentTime;
+        
+        buttonStartRef.disabled = true;
 
+        intervalId = setInterval(() => {
+       
+          currentTime = Date.now();
+            
+          deltaTime = selectedDates[0] - currentTime;
+
+          if (deltaTime < 1000) {
+            clearInterval(intervalId);
+          }
+    
             updateClockFace();
           
               
@@ -53,6 +59,9 @@ const options = {
               dataHoursTimer.innerHTML = `${hours}`;
               dataDaysTimer.innerHTML = `${days}`;
             }
+          if (currentTime = 0) {
+            clearInterval(intervalId);
+          }
           }, 1000);
       }
     }
