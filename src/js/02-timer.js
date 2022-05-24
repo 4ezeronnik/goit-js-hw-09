@@ -6,18 +6,18 @@ import "flatpickr/dist/flatpickr.min.css";
 const buttonStartRef = document.querySelector('button[data-start]');
 const inputRef = document.querySelector('input[type="text"]');
 
-const timer = {
-    start() {
-        const startTime = Date.now();
-        setInterval(() => {
-            const currentTime = Date.now();
-            const deltaTime = currentTime - startTime;
-            const timeComponents = convertMs(deltaTime);
-            console.log(timeComponents);
-            // console.log(currentTime - startTime);
-        }, 1000);
-    }
-}
+// const timer = {
+//     start() {
+//         const startTime = Date.now();
+//         setInterval(() => {
+//             const currentTime = Date.now();
+//             const deltaTime = currentTime - startTime;
+//             const timeComponents = convertMs(deltaTime);
+//             console.log(timeComponents);
+//             // console.log(currentTime - startTime);
+//         }, 1000);
+//     }
+// }
 // timer.start();
 
 
@@ -27,7 +27,20 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+      console.log(selectedDates[0]);
+      const timer = {
+    start() {
+        const startTime = Date.now();
+        setInterval(() => {
+            const currentTime = Date.now();
+            const deltaTime = selectedDates[0] - currentTime;
+            const timeComponents = convertMs(deltaTime);
+            console.log(timeComponents);
+            // console.log(currentTime - startTime);
+        }, 1000);
+    }
+}
+timer.start();
   },
 };
 
@@ -36,7 +49,7 @@ const options = {
 buttonStartRef.addEventListener('click', onButtonClick);
 
 function onButtonClick() {
-    inputRef.textContent = convertMs();
+  
   
 }
 
