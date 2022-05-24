@@ -17,18 +17,22 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  
+  isActive: buttonStartRef.disabled = true,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     
       let currentTime = Date.now();
             
-            let deltaTime = selectedDates[0] - currentTime;
-
+    let deltaTime = selectedDates[0] - currentTime;
+    
             if (deltaTime < 0) {
               window.alert("Please choose a date in the future");
               return
+            } else {
+              buttonStartRef.disabled = false;
             }
+    
+  
     
     const timer = {
       start() {
@@ -52,11 +56,11 @@ const options = {
           }, 1000);
       }
     }
-      buttonStartRef.addEventListener('click', timer.start);
+    buttonStartRef.addEventListener('click', timer.start);
   },
 };
 
- const fp = flatpickr(inputRef, options);
+const fp = flatpickr(inputRef, options);
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
