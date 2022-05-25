@@ -1,5 +1,6 @@
 
 import flatpickr from "flatpickr";
+import Notiflix from "notiflix";
 
 import "flatpickr/dist/flatpickr.min.css";
 
@@ -27,7 +28,7 @@ const options = {
     let intervalId = null;
     
             if (deltaTime < 0) {
-              window.alert("Please choose a date in the future");
+             Notiflix.Notify.failure("Please choose a date in the future");
               return
             } else {
               buttonStartRef.disabled = false;
