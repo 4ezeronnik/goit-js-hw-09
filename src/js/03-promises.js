@@ -26,16 +26,20 @@ function onFormSubmit(evt) {
   const amountData = Number(checkedData.amount);
 
 
+
     console.log(localStorage.getItem(STORAGE_KEY));
     evt.target.reset();
   localStorage.removeItem(STORAGE_KEY);
 
  
  for (let amount = 0; amount < amountData; amount++)
-  createPromise(amount, delayData);
-   
-  function createPromise(position, delay) {
-   
+  createPromise(amount + 1, delayData);
+  
+}
+
+
+ 
+function createPromise(position, delay) {
     
     const shouldResolve = Math.random() > 0.3;
     
@@ -48,9 +52,3 @@ function onFormSubmit(evt) {
   }, delay);
  
 }
-  
-}
-
-
- 
-
