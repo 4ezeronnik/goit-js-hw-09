@@ -39,6 +39,7 @@ const options = {
       start() {
         
         buttonStartRef.disabled = true;
+        inputRef.disabled = true;
 
         intervalId = setInterval(() => {
        
@@ -60,9 +61,8 @@ const options = {
               dataHoursTimer.innerHTML = `${hours}`;
               dataDaysTimer.innerHTML = `${days}`;
             }
-          if (currentTime = 0) {
-            clearInterval(intervalId);
-          }
+          
+         
           }, 1000);
       }
     }
