@@ -2,8 +2,6 @@ const formRef = document.querySelector('form');
 
 const STORAGE_KEY = 'feedback-form-state';
 
-let amount = 1;
-
 formRef.addEventListener('input', onFormInput);
 formRef.addEventListener('submit', onFormSubmit);
 
@@ -21,9 +19,10 @@ function onFormSubmit(evt) {
   if (!checkedData.delay || !checkedData.step || !checkedData.amount)  {  
         return
   }
-  const delayData = Number(checkedData.delay);
+let delayData = Number(checkedData.delay);
   const stepData = Number(checkedData.step);
   const amountData = Number(checkedData.amount);
+  
 
 
 
@@ -31,24 +30,33 @@ function onFormSubmit(evt) {
     evt.target.reset();
   localStorage.removeItem(STORAGE_KEY);
 
- 
- for (let amount = 0; amount < amountData; amount++)
-  createPromise(amount + 1, delayData);
-  
-}
+for (let amount = 0; amount < amountData; amount++)
+    createPromise(amount + 1, delayData+=stepData);
+   
 
-
+  function createPromise(position, delay) {
  
-function createPromise(position, delay) {
-    
+  const promise = new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
-    
     setTimeout(() => {
-    if (shouldResolve) {
-      console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-    } else {
-      console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-    }
-  }, delay);
+    
+      if (shouldResolve) {
+       resolve (`✅ Fulfilled promise ${position} in ${delay}ms`);
+      } else {
+      reject(`❌ Rejected promise ${position} in ${delay}ms`);
+      }
+    }, delay);
+  })
  
+    promise.then(result => {
+      console.log(result);
+    }).catch(error => {
+      console.log(error);
+    })
+    return promise;
 }
+}
+
+
+ 
+
