@@ -29,7 +29,7 @@ function onFormSubmit(evt) {
   evt.target.reset();
   localStorage.removeItem(STORAGE_KEY);
 
-for (let amount = 0; amount < amountData; amount++)
+  for (let amount = 0; amount < amountData; amount++)
     createPromise(amount + 1, delayData+=stepData);
    
 
