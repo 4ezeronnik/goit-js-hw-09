@@ -32,27 +32,30 @@ function onFormSubmit(evt) {
   localStorage.removeItem(STORAGE_KEY);
   
   for (let amount = 0; amount < amountData; amount++)
-    createPromise(amount + 1, delayData+=stepData);
+    createPromise(amount + 1, delayData += stepData)
+      .then(({ position, delay }) => {
+      Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+    })
+      .catch(({ position, delay }) => {
+     Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+    })
    
 
   function createPromise(position, delay) {
- 
-  const promise = new Promise((resolve, reject) => {
+
+    const promise = new Promise((resolve, reject) => {
+    
     const shouldResolve = Math.random() > 0.3;
     setTimeout(() => {
       if (shouldResolve) {
-       resolve (`✅ Fulfilled promise ${position} in ${delay}ms`);
+       resolve ({ position, delay });
       } else {
-      reject(`❌ Rejected promise ${position} in ${delay}ms`);
+      reject({ position, delay });
       }
     }, delay-=stepData);
   })
  
-    promise.then(result => {
-      Notiflix.Notify.success(result);
-    }).catch(error => {
-     Notiflix.Notify.failure(error);
-    })
+    return promise;
     
 }
 }
