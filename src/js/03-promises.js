@@ -1,3 +1,5 @@
+import Notiflix from "notiflix";
+
 const formRef = document.querySelector('form');
 
 const STORAGE_KEY = 'feedback-form-state';
@@ -47,9 +49,9 @@ function onFormSubmit(evt) {
   })
  
     promise.then(result => {
-      console.log(result);
+      Notiflix.Notify.success(result);
     }).catch(error => {
-      console.log(error);
+     Notiflix.Notify.failure(error);
     })
     
 }
