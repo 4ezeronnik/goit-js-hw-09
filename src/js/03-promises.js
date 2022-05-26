@@ -14,20 +14,19 @@ function onFormInput(evt) {
 }
 
 function onFormSubmit(evt) {
-    evt.preventDefault();
-    const checkedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || '';
-  if (!checkedData.delay || !checkedData.step || !checkedData.amount)  {  
-        return
+  evt.preventDefault();
+  const checkedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || '';
+  if (!checkedData.delay || !checkedData.step || !checkedData.amount) {
+    return
   }
-let delayData = Number(checkedData.delay);
+  let delayData = Number(checkedData.delay);
   const stepData = Number(checkedData.step);
   const amountData = Number(checkedData.amount);
   
 
 
-
-    console.log(localStorage.getItem(STORAGE_KEY));
-    evt.target.reset();
+  console.log(localStorage.getItem(STORAGE_KEY));
+  evt.target.reset();
   localStorage.removeItem(STORAGE_KEY);
 
 for (let amount = 0; amount < amountData; amount++)
@@ -53,7 +52,7 @@ for (let amount = 0; amount < amountData; amount++)
     }).catch(error => {
       console.log(error);
     })
-    return promise;
+    
 }
 }
 
