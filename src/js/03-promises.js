@@ -28,7 +28,7 @@ function onFormSubmit(evt) {
   console.log(localStorage.getItem(STORAGE_KEY));
   evt.target.reset();
   localStorage.removeItem(STORAGE_KEY);
-
+  
   for (let amount = 0; amount < amountData; amount++)
     createPromise(amount + 1, delayData+=stepData);
    
@@ -38,13 +38,12 @@ function onFormSubmit(evt) {
   const promise = new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
     setTimeout(() => {
-    
       if (shouldResolve) {
        resolve (`✅ Fulfilled promise ${position} in ${delay}ms`);
       } else {
       reject(`❌ Rejected promise ${position} in ${delay}ms`);
       }
-    }, delay);
+    }, delay-=stepData);
   })
  
     promise.then(result => {
